@@ -89,7 +89,7 @@ open class AudioItem: NSObject {
         if let lowURL = lowQualitySoundURL {
             URLs[.low] = lowURL
         }
-        self.init(soundURLs: URLs)
+        self.init(soundURLs: URLs, showInNowPlaying: showInNowPlaying)
     }
 
     /// Initializes an `AudioItem`.
