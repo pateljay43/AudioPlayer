@@ -347,6 +347,7 @@ public class AudioPlayer: NSObject {
     func updateNowPlayingInfoCenter() {
         #if os(iOS) || os(tvOS)
             if let item = currentItem {
+                guard item.showInNowPlaying else { return }
                 MPNowPlayingInfoCenter.default().ap_update(
                     with: item,
                     duration: currentItemDuration,

@@ -62,6 +62,10 @@ public struct AudioItemURL {
 open class AudioItem: NSObject {
     /// Returns the available qualities.
     public let soundURLs: [AudioQuality: URL]
+    
+    /// Determines if this item should be sent to
+    /// now playing center
+    let showInNowPlaying: Bool
 
     // MARK: Initialization
 
@@ -73,7 +77,8 @@ open class AudioItem: NSObject {
     ///   - lowQualitySoundURL: The URL for the low quality sound.
     public convenience init?(highQualitySoundURL: URL? = nil,
                              mediumQualitySoundURL: URL? = nil,
-                             lowQualitySoundURL: URL? = nil) {
+                             lowQualitySoundURL: URL? = nil,
+                             showInNowPlaying: Bool = true) {
         var URLs = [AudioQuality: URL]()
         if let highURL = highQualitySoundURL {
             URLs[.high] = highURL
@@ -90,8 +95,9 @@ open class AudioItem: NSObject {
     /// Initializes an `AudioItem`.
     ///
     /// - Parameter soundURLs: The URLs of the sound associated with its quality wrapped in a `Dictionary`.
-    public init?(soundURLs: [AudioQuality: URL]) {
+    public init?(soundURLs: [AudioQuality: URL], showInNowPlaying: Bool = true) {
         self.soundURLs = soundURLs
+        self.showInNowPlaying = showInNowPlaying
         super.init()
 
         if soundURLs.isEmpty {
